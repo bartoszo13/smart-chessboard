@@ -13,8 +13,21 @@ def observe(board):
         else:
             board_list.append(2)
 
-
     return tuple(board_list)
 
+def hamming(a, b):
+    if len(a) != len(b):
+        raise ValueError("err: the readings must be the same length")
+    
+    distance = 0
+    
+    for x, y in zip(a, b):
+        if x != y: 
+            distance += 1
+
+    return distance
+
 if __name__ == "__main__":
-    print(observe(chess.Board()))
+    a = observe(chess.Board())
+    print(a)
+    print(hamming(a, a))
