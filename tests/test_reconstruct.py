@@ -128,3 +128,4 @@ def test_detect_move_unknown_when_game_is_over():
     obs[chess.H3] = 1
     obs = tuple(obs)
     assert detect_move(board, obs) == (Status.UNKNOWN, None)
+    
