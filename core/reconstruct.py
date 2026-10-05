@@ -7,6 +7,7 @@ class Status(Enum):
     NO_CHANGE = "no_change"
     MOVE = "move"
     UNKNOWN = "unknown"
+    UNRELIABLE_SIGNAL = "unreliable_signal"
 
 def score_moves(board, observed):
     scores = []
@@ -56,3 +57,4 @@ def detect_move(board, observed, max_distance=1):
             return (Status.MOVE, move)
         else:
             return (Status.UNKNOWN, move)
+        

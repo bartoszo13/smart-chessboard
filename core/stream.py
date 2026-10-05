@@ -1,4 +1,5 @@
 from collections import deque
+from core.reconstruct import detect_move, Status
 
 class Debouncer:
     def __init__(self, n=3):
@@ -19,3 +20,21 @@ class Debouncer:
                 return None
 
         return reading
+
+class Tracker:
+    def __init__(self, board, n=3, max_distance=1):
+        self.debouncer = Debouncer(n)
+        self.board = board
+        self.max_distance = max_distance
+
+    def update(self, reading):
+        stable = self.debouncer.update(reading)
+        if stable is None:
+            return (Status.UNRELIABLE_SIGNAL, None)
+
+        status, move = detect_move(self.board, stable, self.max_distance)
+        if status == Status.MOVE:
+            self.board.push(move)
+
+        return (status, move)
+    
